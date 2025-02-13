@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Quiz App</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quiz App</h1>
+        <select id="category" onchange="selectCategory()">
+            <option value="Select subject">Select subject</option>
+            <option value="DBMS">DBMS</option>
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JS">JavaScript</option>
+            <option value="Python">Python</option>
+            <option value="Fundamentals">Fundamentals of Computer</option>
+            <option value="IOT">IOT</option>
+            <option value="Networks">Computer Networks</option>
+        </select>
+        <div id="quiz-container">
+            <div class="subject">
+                <h2>Select your subject !</h2>
+            </div>
+        </div>
+        <div id="score-container">
+            <h2>Scores</h2>
+            <ul id="score-list"></ul>
+            <p>Average Score: <span id="average-score">0</span></p>
+        </div>
+        <button onclick="submitQuiz()">Submit</button>
+        
+    </div>
+
+
+   <script src="script.js"></script>
+</body>
+
+</html>
