@@ -527,6 +527,7 @@ const quizData = {
         const label = document.createElement("label");
         label.classList.add("answer-label");
         const radio = document.createElement("input");
+        radio.classList.add("answer-radio")
         radio.type = "radio";
         radio.name = `question-${index}`;
         radio.value = answer;
@@ -554,9 +555,7 @@ const quizData = {
       const selectedAnswer = document.querySelector(
         `input[name='question-${index}']:checked`
       );
-      console.log(selectedAnswer);
-      const questionDiv = document.querySelectorAll(".question")[index];
-      console.log(questionDiv);
+      // const questionDiv = document.querySelectorAll(".question")[index];
   
       if (selectedAnswer) {
         if (selectedAnswer.value === q.correct) {
@@ -586,8 +585,13 @@ const quizData = {
       scoreList.appendChild(li);
     }
   
-    const averageScore = count > 0 ? (totalScore / count).toFixed(2) : 0;
+    const averageScore = (totalScore / 80)*100;
     document.getElementById("average-score").textContent = averageScore;
     // document.getElementById("score-container").style.display = "block";
+    // for(let key in scores){
+    //  totalScore+=scores[key]
+    //  console.log("totalMarks is",totalScore)
+    // }
+    // console.log(scores)
   }
   
