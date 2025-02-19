@@ -507,13 +507,32 @@ const quizData = {
     },
     ],
   };
-  
+  let data = document.createElement('div');
   let scores = {};
   
   function selectCategory() {
     const category = document.getElementById("category").value;
     const quizContainer = document.getElementById("quiz-container");
     quizContainer.innerHTML = "";
+    
+    let userInputDiv=document.querySelector(".user-input-div");
+    userInputDiv.innerHTML="";
+
+    let userNameInput=document.createElement("input");
+    userNameInput.classList.add("user-name-input")
+    userNameInput.type="text";
+    userNameInput.placeholder="Enter full name";
+    userNameInput.required= true;
+
+    let roleNoInput = document.createElement("input");
+    roleNoInput.classList.add("rollNo-input")
+    roleNoInput.type="number";
+    roleNoInput.placeholder="Enter roll Number";
+    roleNoInput.required = true;
+
+    userInputDiv.appendChild(userNameInput);
+    userInputDiv.appendChild(roleNoInput);
+
   
     quizData[category].forEach((q, index) => {
       const questionDiv = document.createElement("div");
@@ -541,14 +560,71 @@ const quizData = {
       quizContainer.appendChild(questionDiv);
       quizContainer.appendChild(answersDiv);
     });
+
+    data.innerHTML= quizContainer.innerHTML;
+    console.log(data)
+
+    // let scoreContainer = `<div id="score-container">
+    //         <h2>Scores</h2>
+    //         <ul id="score-list"></ul>
+    //     </div>
+    //     <button onclick="submitQuiz()">Submit</button>`
+
+    // let scoreContainer = document.createElement("div");
+    // scoreContainer.id="score-container";
+    //  scoreContainer.innerHTML=`<h2>Scores</h2>
+    //        <ul id="score-list"></ul>`
+
+    //     quizContainer.appendChild(scoreContainer);
+        let button = document.createElement("button");
+        button.id="user-submit-btn" 
+        button.textContent = "Submit"; 
+        button.setAttribute("onclick", "submitQuiz()"); 
+        
+        quizContainer.appendChild(button);
+        
   }
   
   function submitQuiz() {
-    const category = document.getElementById("category").value;
-    if(category=="Select subject"){
-      alert("Select subject first !")
-      return;
+    // const category = document.getElementById("category").value;
+    const userName=document.querySelector(".user-name-input").value;
+    const rollNumber = document.querySelector(".rollNo-input").value;
+
+
+    // if(category=="Select subject"){
+    //   alert("Select subject first !")
+    //   return;
+    // }
+    if(userName == ""){
+      alert("Enter user Name first");
+      return ;
     }
+
+    if(rollNumber == ""){
+      alert("enter roll number first");
+      return ;
+    }
+
+    const quizContainer = document.getElementById("quiz-container");
+    quizContainer.innerHTML = "";
+
+    let scoreDiv = document.createElement('div');
+    scoreDiv.classList.add("score-div");
+
+    let submitMsg = document.createElement("h4");
+    submitMsg.classList.add("submit-msg");
+    submitMsg.textContent=" Your respons has been submited check your answers ! "
+
+    let scoreContainer = document.createElement("div");
+    scoreContainer.id="score-container";
+    scoreContainer.innerHTML=`<h2>Scores</h2>
+           <ul id="score-list"></ul>`
+    scoreDiv.appendChild(scoreContainer);
+    scoreDiv.appendChild(submitMsg)
+    quizContainer.appendChild(scoreDiv);
+    quizContainer.appendChild(data)
+
+    
     let score = 0;
   
     quizData[category].forEach((q, index) => {
@@ -585,8 +661,8 @@ const quizData = {
       scoreList.appendChild(li);
     }
   
-    const averageScore = (totalScore / 80)*100;
-    document.getElementById("average-score").textContent = averageScore;
+    // const averageScore = (totalScore / 80)*100;
+    // document.getElementById("average-score").textContent = averageScore;
     // document.getElementById("score-container").style.display = "block";
     // for(let key in scores){
     //  totalScore+=scores[key]
