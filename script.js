@@ -577,14 +577,14 @@ function selectCategory() {
   userNameInput.classList.add("user-name-input");
   userNameInput.type = "text";
   userNameInput.placeholder = "Enter full name";
-  userNameInput.name="StudentName"
+  userNameInput.name = "StudentName";
   userNameInput.required = true;
 
   let roleNoInput = document.createElement("input");
   roleNoInput.classList.add("rollNo-input");
   roleNoInput.type = "number";
   roleNoInput.placeholder = "Enter roll Number";
-  roleNoInput.name="StudentRollNo."
+  roleNoInput.name = "StudentRollNo.";
   roleNoInput.required = true;
 
   userInputDiv.appendChild(userNameInput);
@@ -672,9 +672,10 @@ function submitQuiz() {
   heading.textContent = "Score :";
 
   const scoreSpan = document.createElement("span");
+  scoreSpan.id = "score-span";
   scoreSpan.textContent = score;
-  scoreSpan.style.font="bold"
-  scoreSpan.style.fontSize="30px"
+  scoreSpan.style.font = "bold";
+  scoreSpan.style.fontSize = "30px";
 
   const msg = document.createElement("h3");
   msg.classList.add("msg");
@@ -690,4 +691,37 @@ function submitQuiz() {
   // Check if the button is selected
   btn.disabled = true;
   btn.classList.add("btn-disable");
+
+  SaveData();
+}
+
+function SaveData() {
+  const sub = document.getElementById("category").value;
+  const userName =
+    document.getElementsByClassName("user-name-input")[0]?.value || "";
+  const rollNo =
+    document.getElementsByClassName("rollNo-input")[0]?.value || "";
+  const score = document.getElementById("score-span").textContent || "0";
+
+  console.log(sub, userName, rollNo, score);
+
+  let quizData = {
+    studentName: userName,
+    rollNumber: rollNo,
+    subject: sub,
+    score: score, // Ensure score is a valid value
+  };
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbxB7aHXC-SQ5Jp-WK9T5F92tol4WwQx3R5ycWD17J2cSQpgoFQ2p4dXwPOqn3DlGXdNNA/exec",
+    {
+      method: "POST",
+      mode: "no-cors", // Prevents CORS errors, but you can't see the response
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(quizData),
+    }
+  )
+    .then((response) => response.text()) // Read response text
+    .then((data) => console.log("Response from server:", data)) // Log server response
+    .catch((error) => console.error("Error:", error));
 }
