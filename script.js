@@ -577,12 +577,14 @@ function selectCategory() {
   userNameInput.classList.add("user-name-input");
   userNameInput.type = "text";
   userNameInput.placeholder = "Enter full name";
+  userNameInput.name="StudentName"
   userNameInput.required = true;
 
   let roleNoInput = document.createElement("input");
   roleNoInput.classList.add("rollNo-input");
   roleNoInput.type = "number";
   roleNoInput.placeholder = "Enter roll Number";
+  roleNoInput.name="StudentRollNo."
   roleNoInput.required = true;
 
   userInputDiv.appendChild(userNameInput);
@@ -667,10 +669,12 @@ function submitQuiz() {
   scoreDiv.classList.add("score-div");
 
   const heading = document.createElement("h3");
-  heading.textContent = "Score";
+  heading.textContent = "Score :";
 
   const scoreSpan = document.createElement("span");
   scoreSpan.textContent = score;
+  scoreSpan.style.font="bold"
+  scoreSpan.style.fontSize="30px"
 
   const msg = document.createElement("h3");
   msg.classList.add("msg");
